@@ -1,6 +1,8 @@
 target/
+springmvc/target/
+.idea/
 
-.idea
+
 *.iml
 *.log
 *.txt
