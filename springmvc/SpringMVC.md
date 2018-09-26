@@ -96,3 +96,23 @@ Filter可以用于以下方面：
 @RequestParam、@RequestHeader、@CookieValue、@RequestBody、@ResponseBody中的参数详解  
     
   **请查看RequestMappingController第57行。**
+  
+#####3：使用矩阵变量绑定参数
+    
+     @MatrixVariable 注解  
+     
+     一种我以前没见过的新的注解方式，在Spring3.2第一次出现，在Spring4中得到完善，算是吸引人的新特性。
+     
+   **请查看MatrixVariableController第57行。**
+   
+#####4：模型数据的处理  
+      
+      模型数据类型：
+      ModelAndView:处理方法返回值类型为ModelAndView时，方法体即可通过该对象添加模型数据。
+      @ModelAttribute:在方法入参标注该注解后，入参的对象就会放到数据模型中。
+      Map和Model:如果方法入参为org.springframework.ui.Model、org.springframework.  
+                 ui.ModelMap或java.util.Map, 则当处理方法返回时， Map中的数据会自动  
+                 添加到模型中。
+      @SessionAttributes:将模型中的某个属性暂存到 HttpSession中， 以便多个请求之间可以共享这个属性。
+      
+   **请查看ModelDataController。**

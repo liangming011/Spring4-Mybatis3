@@ -430,8 +430,8 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope><!--依赖的范围：{compile默认值（全程参与），test（仅在测试代码的编译和运行），runtime（不参与项目的编译），provided（不会被打包），system（和provided类似，需要指定本地路径）} -->
+      <version>4.12</version>
+      <scope>test</scope><!--依赖的范围：{compile默认值（全程参与），test（仅在测试代码的编译和运行），runtime（不参与项目的编译），provided（不会被打包），system（和provided类似，需要指定本地路径）}-->
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>

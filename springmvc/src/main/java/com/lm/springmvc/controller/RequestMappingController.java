@@ -1,11 +1,20 @@
 package com.lm.springmvc.controller;
 
 import com.lm.springmvc.entity.User;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.OutputStream;
 
 @Controller
 @RequestMapping("/requestMapping/{Pwd}")
@@ -59,32 +68,40 @@ public class RequestMappingController {
         return null;
     }
 
-    /**几种典型的处理方法签名*/
+    /**几种典型的处理方法签名,以及多种入参类型*/
     /**
      * @RequestParam、@RequestHeader、@CookieValue中的参数详解
      */
 
-    //1: 请求参数按名称匹配的方式绑定到方法入参中。
+    //1: 请求参数按名称匹配的方式绑定到方法入参中。 @RequestParam
     @RequestMapping(path = "/handlel")
-    public String handlel(@RequestParam("userName") String userName,
-                          @RequestParam("pwd") String pwd,
-                          @RequestParam("realName") String realName) {
+    public String handlel(
+            //required = false表示此参数可以不传
+            @RequestParam(value = "userName",required = false) String userName,
+            //required = true表示此参数不可为空,值为空则默认为aaa
+            @RequestParam(value = "pwd",required = true,defaultValue = "aaa") String pwd,
+            //value = "realName"指的是前端的参数名，string1值得是后端的参数名
+            @RequestParam(value = "realName") String string1) {
         return "success";
     }
 
-    //2: 将Cookie值及保文头属性绑定到入参中
+    //2: 将Cookie值及保文头属性绑定到入参中。@CookieValue、@RequestHeader
     @RequestMapping(path = "/handle2")
-    public ModelAndView handle2(@CookieValue("JSESSIONID") String sessionld,
-                                @RequestHeader("Accept-Language") String accpetLanguage) {
+    public ModelAndView handle2(
+            //可绑定Cookie中的某个值
+            @CookieValue("JSESSIONID") String sessionld,
+            ////可绑定Header报文头中的某个属性值
+            @RequestHeader("Accept-Language") String accpetLanguage) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("success");
         mav.addObject("user", new User());
         return mav;
     }
 
-    //3: 请求参数按名称匹配的方式绑定到User的属性中，
-    // @RequestBody可有可无，默认转换实体，参数可有可无时，需要配置其中属性。
-    // @ResponseBody可有可无，默认转换成json，具体看实体类中配置方式
+    //3: 请求参数按名称匹配的方式绑定到User的属性中.
+    // @RequestBody, 可有可无，默认转换注入实体中，需要配置其中属性。
+    // @ResponseBody，实体默认转换成json返回，具体看情况如String、byte[]等，具体看实体类中配置方式。
+    //HttpMessageConverter<T>接口负责这种转换
     @RequestMapping(path = "/handle3")
     public @ResponseBody User handle3(@RequestBody User user) {
         return user;
@@ -92,13 +109,33 @@ public class RequestMappingController {
 
     //4: 直接桴HTTP请戎对象抟递给处理方法
     @RequestMapping(path="/handle4")
-    public String handle4(HttpServletRequest request) {
+    public String handle4(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         request.getSession();
         request.getCookies();
         request.getHeader("Content-type");
+        User user = (User) session.getAttribute("user");
         //……
+        return response.encodeRedirectURL("success");
+    }
+
+    //5: （不常用）直接桴HTTP请求对象抟递给处理方法
+    //WebRequest和NativeWebRequest, 它们也允许作为处理类的入参， 通过这些代理类可访问请求对象的任何信息，
+    @RequestMapping(path = "/handle5")
+    public String handle5(WebRequest request, NativeWebRequest nativeWebRequest) {
+        User user = new User();
+        request.getParameter("");
+        request.setAttribute("user",user,1);
+        nativeWebRequest.getParameter("");
+        nativeWebRequest.setAttribute("user",user,1);
         return "success";
     }
 
-}
+    //6: 使用I/O对象作为入参
+    @RequestMapping(path = "/handle6")
+    public String handle6(OutputStream os) throws IOException {
+        Resource res = new ClassPathResource("/image.jpg");//读取文件
+        FileCopyUtils.copy(res.getInputStream(),os);//将图片写到输出流中
 
+        return "success";
+    }
+}

@@ -7,7 +7,6 @@
 
     <!--com.lm.springmvc.config.SpringMVCApplicationinitializer，新型的配置方式！！！！！ -->
 
-
     <!-- 配置session过期时间120分钟 -->
     <session-config>
         <session-timeout>120</session-timeout>
