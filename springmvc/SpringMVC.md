@@ -116,3 +116,7 @@ Filter可以用于以下方面：
       @SessionAttributes:将模型中的某个属性暂存到 HttpSession中， 以便多个请求之间可以共享这个属性。
       
    **请查看ModelDataController。**
+   
+####四：处理方法的数据绑定  
+
+![avatar](./src/main/webapp/static/pic/4.png)

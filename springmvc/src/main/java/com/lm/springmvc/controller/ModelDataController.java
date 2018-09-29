@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.util.Map;
 
 @Controller
-@SessionAttributes("user")
+@SessionAttributes(value = {"user1","user2"},types = {User.class})
 public class ModelDataController {
 
     /**
@@ -21,18 +21,21 @@ public class ModelDataController {
      * 3：Map和Model
      * 4：@SessionAttributes ：如果希望在多个请求之间共用某个模型属性数据，则可以在控制器类中标注一个 @SessionAttributes,
      *                        Spring MVC会将模型中对应的属性（通过名称如user）暂存到HttpSession中。
+     *                        @SessionAttributes(value={"user1", "user2"}): 将名为user1及user2的模型属性添加到会话中。
+     *                        @SessionAttributes(types= {User.class,Dept.class}): 将模型中所有类型为User及Dept的属性添加到会话中。
+     *                        @SessionAttributes(value= {"user1", "user2"} ,types= {Dept.class}): 将名为user1及user2的模型属性添加到会话中，同时将所有类型为Dept的模型属性添加到会话中。
      * */
 
 
     //2：@ModelAttribute：将入参加入模型
     @RequestMapping(path = "/handle1")
-    public String handle1 (@ModelAttribute("user") User user) {
+    public String handle1 (@ModelAttribute("user1") User user) {
         user.setName("asafsd");
         return "/user/createSuccess";
     }
     //2：@ModelAttribute:将返回值加入模型
     @RequestMapping(path = "/handle2")
-    @ModelAttribute("user")
+    @ModelAttribute("user2")
     public User handle2 () {
         User user = new User();
         user.setName("asafsd");
