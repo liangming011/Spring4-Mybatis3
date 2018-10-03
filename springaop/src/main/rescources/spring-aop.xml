@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- aop 简单实用 接口代理-->
+    <!-- 增强 -->
+    <bean id="beforeAdvice" class="com.lm.springaop.aop.advice.GreetingBeforeAdvice"/>
+    <!-- 目标接口对象的实现类 -->
+    <bean id="typeServiceImpl" class="com.lm.springaop.service.impl.TypeServiceImpl"/>
+    <!-- 创建代理工厂 -->
+    <bean id="proxyFactory1" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:proxyInterfaces="com.lm.springaop.service.TypeService"
+          p:interceptorNames="beforeAdvice"
+          p:target="typeServiceImpl"/>
+
+    <!-- 自动创建代理类 -->
+    <!-- BeanNameAutoProxyCreator 通过 bean 名称扫描创建代理-->
+    <bean id="proxyFactory2" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"
+          p:beanNames="com.lm.springaop.service.impl.*ServiceImpl"
+          p:interceptorNames="beforeAdvice"
+          p:optimize="true"/>
+    <!-- DefaultAdvisorAutoProxyCreator 通过 切面Advisor 扫描容器方法名称创建代理-->
+    <!-- 首先定义切面 需要切点和增强 引入DefaultAdvisorAutoProxyCreator为容器中所有带"greet"方法名的目标Bean自动创建代理-->
+    <bean class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"
+          p:advice="beforeAdvice"
+          p:patterns="*.greet.*"/>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+</beans>

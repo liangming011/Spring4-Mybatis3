@@ -11,6 +11,7 @@
         <module>springmvc</module>
         <module>springtest</module>
         <module>springtest</module>
+      <module>springaop</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -238,11 +239,11 @@
     </dependency>
 
     <!-- json-lib依赖包 -->
-    <dependency>
-      <groupId>net.sf.json-lib</groupId>
-      <artifactId>json-lib</artifactId>
-      <version>${netjson.version}</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>net.sf.json-lib</groupId>-->
+      <!--<artifactId>json-lib</artifactId>-->
+      <!--<version>${netjson.version}</version>-->
+    <!--</dependency>-->
 
     <!-- @ResponseBody JSON依赖方法一 -->
     <dependency>
@@ -267,6 +268,14 @@
       <artifactId>gson</artifactId>
       <version>2.8.2</version>
     </dependency>
+
+    <!-- aop编程 cglib包 -->
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>3.2.8</version>
+    </dependency>
+
 
 
     <!-- Log4j包 -->

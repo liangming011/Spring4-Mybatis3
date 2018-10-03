@@ -1,4 +1,4 @@
-package com.lm.springtest;
+package com.lm.springaop;
 
 import org.junit.*;
 import org.junit.runner.RunWith;

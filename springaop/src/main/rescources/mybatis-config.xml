@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+        指定与数据库相关的配置资源文件名，若下面的dataSource所需要的url等直接配置编码在此文件，那么此properties也可以去掉
+    -->
+    <properties resource="db.properties" />
+    <settings  >
+        <!-- 设置但JDBC类型为空时,某些驱动程序要指定值,default:other -->
+        <setting name="jdbcTypeForNull" value="OTHER" />
+        <!-- 配置全局性 cache 的 ( 开 / 关) default:true -->
+        <setting name="cacheEnabled" value="false"/>
+
+        <!-- 是否使用 懒加载 关联对象  同 hibernate中的延迟加载 一样  default:true -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+
+        <!-- [当对象使用延迟加载时 属性的加载取决于能被引用到的那些延迟属性,否则,按需加载(需要的是时候才去加载)] -->
+        <setting name="aggressiveLazyLoading" value="true"/>
+
+        <!-- 是否允许单条sql 返回多个数据集  (取决于驱动的兼容性) default:true -->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+
+        <!-- 是否可以使用列的别名 (取决于驱动的兼容性) default:true-->
+        <setting name="useColumnLabel" value="true"/>
+        <!-- 设置驱动等待数据响应的超时数  默认没有设置-->
+        <setting name="defaultStatementTimeout" value="25000"/>
+    </settings>
+
+    <!-- 给指定的类定义别名，这样在后面的Mapping映射文件中，可以直接写别名，可以不用写完整限定类名了 -->
+    <typeAliases>
+        <typeAlias alias="entityType" type="com.lm.springaop.entity.Type" />
+
+    </typeAliases>
+
+
+
+</configuration>
