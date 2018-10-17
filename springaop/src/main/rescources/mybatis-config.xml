@@ -6,10 +6,10 @@
     <!--
         指定与数据库相关的配置资源文件名，若下面的dataSource所需要的url等直接配置编码在此文件，那么此properties也可以去掉
     -->
-    <properties resource="db.properties" />
-    <settings  >
+    <properties resource="db.properties"/>
+    <settings>
         <!-- 设置但JDBC类型为空时,某些驱动程序要指定值,default:other -->
-        <setting name="jdbcTypeForNull" value="OTHER" />
+        <setting name="jdbcTypeForNull" value="OTHER"/>
         <!-- 配置全局性 cache 的 ( 开 / 关) default:true -->
         <setting name="cacheEnabled" value="false"/>
 
@@ -30,10 +30,9 @@
 
     <!-- 给指定的类定义别名，这样在后面的Mapping映射文件中，可以直接写别名，可以不用写完整限定类名了 -->
     <typeAliases>
-        <typeAlias alias="entityType" type="com.lm.springaop.entity.Type" />
+        <typeAlias alias="entityType" type="com.lm.springaop.entity.Type"/>
 
     </typeAliases>
-
 
 
 </configuration>

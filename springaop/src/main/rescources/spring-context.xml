@@ -25,7 +25,7 @@
     <aop:aspectj-autoproxy/>
 
     <!--对注解@Transactional注解的Bean进行加工处理  以注入事务管理切面-->
-    <tx:annotation-driven transaction-manager="txManager" />
+    <tx:annotation-driven transaction-manager="txManager"/>
     <!-- 配置事务管理器，依赖于数据源 -->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
@@ -34,10 +34,10 @@
     <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
             <!--传播行为-->
-            <tx:method name="delete*" propagation="REQUIRES_NEW" read-only="false" rollback-for="java.lang.Exception" />
-            <tx:method name="save*" propagation="REQUIRES_NEW" read-only="false" rollback-for="java.lang.Exception" />
-            <tx:method name="insert*" propagation="REQUIRES_NEW" read-only="false" rollback-for="java.lang.Exception" />
-            <tx:method name="update*" propagation="REQUIRES_NEW" read-only="false" rollback-for="java.lang.Exception" />
+            <tx:method name="delete*" propagation="REQUIRES_NEW" read-only="false" rollback-for="java.lang.Exception"/>
+            <tx:method name="save*" propagation="REQUIRES_NEW" read-only="false" rollback-for="java.lang.Exception"/>
+            <tx:method name="insert*" propagation="REQUIRES_NEW" read-only="false" rollback-for="java.lang.Exception"/>
+            <tx:method name="update*" propagation="REQUIRES_NEW" read-only="false" rollback-for="java.lang.Exception"/>
             <tx:method name="load*" propagation="SUPPORTS" read-only="true"/>
             <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
             <tx:method name="search*" propagation="SUPPORTS" read-only="true"/>
@@ -48,11 +48,10 @@
     <!-- aop配置事物-->
     <aop:config>
         <!-- 配置事物切点 -->
-        <aop:pointcut id="serviceMethods" expression="execution(* com.lm.springaop.service.impl.*ServiceImpl.*(..))" />
+        <aop:pointcut id="serviceMethods" expression="execution(* com.lm.springaop.service.impl.*ServiceImpl.*(..))"/>
         <!-- 配置事物切面 -->
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
-
 
 
 </beans>

@@ -23,13 +23,13 @@ public class PreGreetingAspectTest extends BaseJunit4Test {
     @Test
     public void beforeGreeting() throws Exception {
         //AspectJ提供的代理工厂
-        AspectJProxyFactory factory= new AspectJProxyFactory();
+        AspectJProxyFactory factory = new AspectJProxyFactory();
         //1.设置目标对象
         factory.setTarget(waiter);
         //2.添加切面类
         factory.addAspect(PreGreetingAspect.class);
         //3.生成织入切面的代理对象
-        Waiter waiter1= factory.getProxy();
+        Waiter waiter1 = factory.getProxy();
         waiter1.greetTo("greetTo");
         waiter1.saveTo("saveTo");
     }

@@ -23,29 +23,30 @@ public class TypeController {
     private static final Logger LOGGER = LogManager.getLogger(TypeController.class);
 
     @RequestMapping("selectType")
-    public @ResponseBody Type selectType(HttpServletRequest request,@RequestBody Type type)throws Exception{
-        LOGGER.debug("selectType的请求参数为："+type.toString());
+    public @ResponseBody
+    Type selectType(HttpServletRequest request, @RequestBody Type type) throws Exception {
+        LOGGER.debug("selectType的请求参数为：" + type.toString());
         Type type1 = typeService.selectType(type);
         return type1;
     }
 
     @RequestMapping("deleteType")
-    public boolean deleteType(@RequestBody Type type)throws Exception{
-        LOGGER.debug("deleteType的请求参数为："+type.toString());
+    public boolean deleteType(@RequestBody Type type) throws Exception {
+        LOGGER.debug("deleteType的请求参数为：" + type.toString());
         boolean flag = typeService.deleteType(type);
         return flag;
     }
 
     @RequestMapping("updateType")
-    public boolean updateType(@RequestBody Type type)throws Exception{
-        LOGGER.debug("updateType的请求参数为："+type.toString());
+    public boolean updateType(@RequestBody Type type) throws Exception {
+        LOGGER.debug("updateType的请求参数为：" + type.toString());
         boolean flag = typeService.updateType(type);
         return flag;
     }
 
     @RequestMapping("insertType")
-    public boolean insertType(@RequestBody Type type)throws Exception{
-        LOGGER.debug("insertType的请求参数为："+type.toString());
+    public boolean insertType(@RequestBody Type type) throws Exception {
+        LOGGER.debug("insertType的请求参数为：" + type.toString());
         boolean flag = typeService.insertType(type);
         return flag;
     }

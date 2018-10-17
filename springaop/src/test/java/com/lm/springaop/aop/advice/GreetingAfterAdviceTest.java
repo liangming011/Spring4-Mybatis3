@@ -34,7 +34,7 @@ public class GreetingAfterAdviceTest extends BaseJunit4Test {
         //引入增强
         BeforeAdvice beforeAdvice = new GreetingBeforeAdvice();
         //spring提供的代理工厂
-        ProxyFactory proxyFactory  = new ProxyFactory();
+        ProxyFactory proxyFactory = new ProxyFactory();
         //设置代理目标对象
         proxyFactory.setTarget(typeService);
         //说明是对接口进行代理，而不是具体的类，代理实现类时，不需要

@@ -14,16 +14,16 @@ public class StringToDateConverterUtils implements Converter<String, Date> {
     private String format;
 
     //提供构造方法注入日期格式
-    public StringToDateConverterUtils(String format){
-        this.format=format;
+    public StringToDateConverterUtils(String format) {
+        this.format = format;
     }
 
     //重写convert方法进行字符串对日期类型的转换
     @Override
     public Date convert(String str) {
-        Date date=null;
+        Date date = null;
         try {
-            date=new SimpleDateFormat(format).parse(str);
+            date = new SimpleDateFormat(format).parse(str);
         } catch (Exception e) {
             e.printStackTrace();
         }

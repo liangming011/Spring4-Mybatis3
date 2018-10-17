@@ -23,16 +23,16 @@
 
     <!-- 配置Session工厂 用Spring管理Mybatis数据源,引入配置文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
         <!-- 制定mapper xml映射 -->
-        <property name="mapperLocations" value="classpath:/com/lm/springaop/mapping/*.xml" />
+        <property name="mapperLocations" value="classpath:/com/lm/springaop/mapping/*.xml"/>
         <!-- 指定MyBatis的核心配置文件 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"></property>
     </bean>
     <!-- dao接口映射 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.lm.springaop.dao" />
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="basePackage" value="com.lm.springaop.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
 </beans>

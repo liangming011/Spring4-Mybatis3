@@ -11,11 +11,11 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-<!-- 测试@AspectJ的自动状态代理工厂 -->
+    <!-- 测试@AspectJ的自动状态代理工厂 -->
     <!-- 目标对象 -->
-    <bean id="waiter" class="com.lm.springaop.aop.aspectj.example.NaiveWaiter" />
+    <bean id="waiter" class="com.lm.springaop.aop.aspectj.example.NaiveWaiter"/>
     <!--@AspectJ注解的切面类-->
-    <bean class="com.lm.springaop.aop.aspectj.PreGreetingAspect" />
+    <bean class="com.lm.springaop.aop.aspectj.PreGreetingAspect"/>
     <!--自功代理创建器， 启动将@AspectJ注解切面类注入目标Bean中 -->
     <!-- 如果实用<aop:aspectj-autoproxy/>注解开启 aop 那么久不需要再写下面的自功代理创建器，默认隐藏了 -->
     <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>
@@ -31,7 +31,7 @@
         </aop:aspect>
     </aop:config>
 
-    <bean id="preGreetingAspect" class="com.lm.springaop.aop.aspectj.PreGreetingAspect" />
-    <bean id="naiveWaiter" class="com.lm.springaop.aop.aspectj.example.NaiveWaiter" />
+    <bean id="preGreetingAspect" class="com.lm.springaop.aop.aspectj.PreGreetingAspect"/>
+    <bean id="naiveWaiter" class="com.lm.springaop.aop.aspectj.example.NaiveWaiter"/>
 
 </beans>

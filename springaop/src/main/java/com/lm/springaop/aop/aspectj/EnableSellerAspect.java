@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class EnableSellerAspect {
 
-    @DeclareParents(value="com.lm.springaop.aop.aspectj.example.NaiveWaiter"//为NaiveWaiter添加挨口实现
-            , defaultImpl =SmartSeller.class)//默认的接口实观类
+    @DeclareParents(value = "com.lm.springaop.aop.aspectj.example.NaiveWaiter"//为NaiveWaiter添加挨口实现
+            , defaultImpl = SmartSeller.class)//默认的接口实观类
     private Seller seller;
 
 }
