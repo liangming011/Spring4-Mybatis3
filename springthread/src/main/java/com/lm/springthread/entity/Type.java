@@ -12,7 +12,7 @@ public class Type implements Serializable {
 
     private int anInt;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")  //日期格式转换方法一，方法二是StringToDateConverterUtils类，在配置文件中配置
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  //日期格式转换方法一，方法二是StringToDateConverterUtils类，在配置文件中配置
     private String aDate;//日期格式应使用String类型，如果不使用String类型，则需要传毫秒数："aDate":1538138845000,
 
     private Float aFloat;

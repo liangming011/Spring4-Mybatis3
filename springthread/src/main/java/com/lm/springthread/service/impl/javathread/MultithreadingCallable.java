@@ -11,7 +11,7 @@ import java.util.concurrent.*;
  * 1）.Callable可以在任务结束后提供一个返回值，Runnable没有提供这个功能。
  * 2）.Callable中的call方法可以抛出异常，而Runnable的run方法不能抛出异常。
  * 3）.运行Callable可以拿到一个Future对象，表示异步计算的结果，提供了检查计算是否完成的方法。
- * */
+ */
 public class MultithreadingCallable implements Callable {
 
     private String x;
@@ -27,7 +27,7 @@ public class MultithreadingCallable implements Callable {
     }
 
     @Override
-    public Object call() throws Exception{
+    public Object call() throws Exception {
         TypeDao typeDao = new TypeDaoImpl();
         try {
             return typeDao.insertType(type);
@@ -37,7 +37,7 @@ public class MultithreadingCallable implements Callable {
         return new Exception("执行错误");
     }
 
-    public static void main(String[] args)throws Exception{
+    public static void main(String[] args) throws Exception {
         //实例化
         MultithreadingCallable t = new MultithreadingCallable("test1");
         //创建线程池

@@ -13,7 +13,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
  * 这是配置类方式配置线程池，也可通过xml 文件配置线程池
- * */
+ */
 
 @Configuration  //制定类为配置类
 @ComponentScan("com.lm.springthread.service.impl")//通过扫描组件的包，为 service 实现层实现多线程

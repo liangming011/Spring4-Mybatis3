@@ -32,8 +32,8 @@
         <!--<bean class="com.lm.springaop.config.interceptor.LoginInterceptor"/>-->
         <!--</mvc:interceptor>-->
         <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/*/**"/>-->
-            <!--<bean class="com.lm.springaop.config.interceptor.PerformanceMonitoringInterceptor"/>-->
+        <!--<mvc:mapping path="/*/**"/>-->
+        <!--<bean class="com.lm.springaop.config.interceptor.PerformanceMonitoringInterceptor"/>-->
         <!--</mvc:interceptor>-->
     </mvc:interceptors>
 

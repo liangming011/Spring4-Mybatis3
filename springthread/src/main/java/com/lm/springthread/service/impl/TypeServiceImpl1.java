@@ -16,7 +16,7 @@ import java.util.concurrent.*;
 
 /**
  * java 多线程的使用
- * */
+ */
 @Service
 public class TypeServiceImpl1 implements TypeService {
 
@@ -57,7 +57,7 @@ public class TypeServiceImpl1 implements TypeService {
     @Override
     public void updateType(Type type) throws Exception {
         Callable callable = new MultithreadingCallable(type);
-        FutureTask<Object> futureTask= new FutureTask<Object>(callable);
+        FutureTask<Object> futureTask = new FutureTask<Object>(callable);
         Thread thread = new Thread(futureTask);
         thread.start();
 
@@ -73,9 +73,9 @@ public class TypeServiceImpl1 implements TypeService {
         //创建任务
         List<Future> taskList = new ArrayList<>();
         //在线程池执行任务并获取Future对象
-        Future<Object> future= executorService.submit(callable);
+        Future<Object> future = executorService.submit(callable);
         //阻塞线程实时获取结果
-        boolean result = (boolean)future.get();
+        boolean result = (boolean) future.get();
         //添加到任务列表
         taskList.add(future);
         //关闭线程池

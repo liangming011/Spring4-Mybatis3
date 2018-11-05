@@ -24,26 +24,26 @@ public class TypeController {
 
     @RequestMapping("selectType")
     public @ResponseBody
-    void selectType(HttpServletRequest request, @RequestBody Type type)throws Exception{
-        LOGGER.debug("selectType的请求参数为："+type.toString());
+    void selectType(HttpServletRequest request, @RequestBody Type type) throws Exception {
+        LOGGER.debug("selectType的请求参数为：" + type.toString());
         typeService.selectType(type);
     }
 
     @RequestMapping("deleteType")
-    public void deleteType(@RequestBody Type type)throws Exception{
-        LOGGER.debug("deleteType的请求参数为："+type.toString());
+    public void deleteType(@RequestBody Type type) throws Exception {
+        LOGGER.debug("deleteType的请求参数为：" + type.toString());
         typeService.deleteType(type);
     }
 
     @RequestMapping("updateType")
-    public void updateType(@RequestBody Type type)throws Exception{
-        LOGGER.debug("updateType的请求参数为："+type.toString());
-       typeService.updateType(type);
+    public void updateType(@RequestBody Type type) throws Exception {
+        LOGGER.debug("updateType的请求参数为：" + type.toString());
+        typeService.updateType(type);
     }
 
     @RequestMapping("insertType")
-    public boolean insertType(@RequestBody Type type)throws Exception{
-        LOGGER.debug("insertType的请求参数为："+type.toString());
+    public boolean insertType(@RequestBody Type type) throws Exception {
+        LOGGER.debug("insertType的请求参数为：" + type.toString());
         boolean flag = typeService.insertType(type);
         return flag;
     }

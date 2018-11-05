@@ -20,12 +20,14 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * java spring多线程的使用
- * */
+ */
 //使用@Async来表明，其要获取线程池线程执行任务
 @Service
 public class TypeServiceImpl2 implements TypeService {
 
-    /** 使用ThreadLocal解决线程安全 **/
+    /**
+     * 使用ThreadLocal解决线程安全
+     **/
     private static final ThreadLocal<Type> typeThreadLocal = new ThreadLocal<>();
 
     @Autowired
@@ -37,9 +39,9 @@ public class TypeServiceImpl2 implements TypeService {
 
     @Override
     @Async// 通过@Async注解方法表名这个方法是一个异步方法，如果注解在类级别，则表名该类的所有方法都是异步的，
-          // 而这里的方法自动被注入使用ThreadPoolTaskExecutor作为TaskExecutor
+    // 而这里的方法自动被注入使用ThreadPoolTaskExecutor作为TaskExecutor
     public void selectType(Type type) throws Exception {
-        System.err.println("执行异步任务====="+type.toString());
+        System.err.println("执行异步任务=====" + type.toString());
         typeDao.selectType(type);
     }
 
