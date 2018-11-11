@@ -7,7 +7,7 @@ import com.lm.springthread.entity.Type;
 
 /**
  * 实现Runnable接口，并实现该接口的run()方法.创建一个Thread对象，用实现的Runnable接口的对象作为参数实例化Thread对象，调用此对象的start方法。
- */
+ **/
 public class MultithreadingRunnable implements Runnable {
 
     private Type type;

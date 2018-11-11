@@ -22,7 +22,7 @@ public class ThreadConfig implements AsyncConfigurer {
 
     // Executor 就是一个线程池
     @Override
-    public Executor getAsyncExecutor() {
+    public ThreadPoolTaskExecutor getAsyncExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         //核心线程数，核心线程会一直存活，即使没有任务需要处理。当线程数小于核心线程数时，
         //即使现有的线程空闲，线程池也会优先创建新线程来处理任务，而不是直接交给现有的线程处理。
@@ -35,6 +35,8 @@ public class ThreadConfig implements AsyncConfigurer {
         //任务队列容量。从maxPoolSize的描述上可以看出，
         //任务队列的容量会影响到线程的变化，因此任务队列的长度也需要恰当的设置。
         taskExecutor.setQueueCapacity(25);
+        //修改饱和策略
+        taskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardOldestPolicy());
         //初始化
         taskExecutor.initialize();
         //除此之外还可以配置很多线程池参数

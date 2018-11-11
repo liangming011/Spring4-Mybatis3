@@ -2,6 +2,7 @@ package com.lm.springthread.controller;
 
 import com.lm.springthread.entity.Type;
 import com.lm.springthread.service.TypeService;
+import com.lm.springthread.service.impl.TypeServiceImpl1;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +26,32 @@ public class TypeController {
     @RequestMapping("selectType")
     public @ResponseBody
     void selectType(HttpServletRequest request, @RequestBody Type type) throws Exception {
+        //引用线程对象实例
+        typeService = new TypeServiceImpl1();
         LOGGER.debug("selectType的请求参数为：" + type.toString());
         typeService.selectType(type);
     }
 
     @RequestMapping("deleteType")
     public void deleteType(@RequestBody Type type) throws Exception {
+        //引用线程对象实例
+        typeService = new TypeServiceImpl1();
         LOGGER.debug("deleteType的请求参数为：" + type.toString());
         typeService.deleteType(type);
     }
 
     @RequestMapping("updateType")
     public void updateType(@RequestBody Type type) throws Exception {
+        //引用线程对象实例
+        typeService = new TypeServiceImpl1();
         LOGGER.debug("updateType的请求参数为：" + type.toString());
         typeService.updateType(type);
     }
 
     @RequestMapping("insertType")
     public boolean insertType(@RequestBody Type type) throws Exception {
+        //引用线程对象实例
+        typeService = new TypeServiceImpl1();
         LOGGER.debug("insertType的请求参数为：" + type.toString());
         boolean flag = typeService.insertType(type);
         return flag;
