@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/cache
+       http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!-- 以前项目中的配置，注意需要添加Spring Data Redis等jar包 -->
+    <description>redis配置</description>
+
+    <!-- 加载配置文件数据库连接文件 -->
+    <!--<context:property-placeholder location="classpath:redis/redis.properties" />-->
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!-- 最大连接数 -->
+        <property name="maxTotal" value="1024"></property>
+        <!-- 最大空闲数：空闲链接数大于maxIdle时，将进行回收 -->
+        <property name="maxIdle" value="200"></property>
+        <!-- 最大等待时间：单位ms -->
+        <property name="maxWaitMillis" value="10000000"></property>
+        <!-- 逐出连接的最小空闲时间 ：单位ms -->
+        <property name="minEvictableIdleTimeMillis" value="20000000"></property>
+        <!-- 每次逐出检查时 逐出的最大数目 -->
+        <property name="numTestsPerEvictionRun" value="60000000"></property>
+        <!-- 逐出扫描的时间间隔(毫秒) -->
+        <property name="timeBetweenEvictionRunsMillis" value="10000000"></property>
+
+        <property name="testOnBorrow" value="true"></property>
+    </bean>
+    <!-- ↑↑↑↑↑redis 的配置信息↑↑↑↑↑ -->
+
+    <!-- ↓↓↓↓↓redis 服务器中心 ↓↓↓↓↓ -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+        <property name="poolConfig" ref="jedisPoolConfig"></property>
+        <!-- Redis服务器地址 -->
+        <property name="hostName" value="localhost"></property>
+        <!-- 服务端口 -->
+        <property name="port" value="6379"></property>
+        <!-- 授权密码 -->
+        <property name="password" value=""></property>
+        <!-- 超时时间：单位ms -->
+        <property name="timeout" value="500000000"></property>
+        <!--启用用户线程池 -->
+        <property name="usePool" value="true"></property>
+    </bean>
+    <!-- ↑↑↑↑↑redis 服务器中心 ↑↑↑↑↑ -->
+
+    <!-- ☂☂☂redis操作模板，面向对象的模板☂ ☂☂ -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+           p:connectionFactory-ref="jedisConnectionFactory" >
+        <!--如果不配置Serializer，那么存储的时候缺省使用String，如果用User类型存储，那么会提示错误User can't cast to String！！  -->
+        <property name="keySerializer">
+            <bean class="com.lm.springredis.rediscommon.StringRedisSerializer"></bean>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+            <!--<bean class="com.lm.springredis.rediscommon.StringRedisSerializer"/>-->
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <!--开启事务  -->
+        <property name="enableTransactionSupport" value="true"></property>
+    </bean>
+
+    <!-- ♨♨♨redis操作模板，面向对象的模板♨♨♨ -->
+    <!--spring cache-->
+    <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
+          c:redisOperations-ref="redisTemplate" >
+        <!-- 默认缓存10分钟 -->
+        <property name="defaultExpiration" value="600"/>
+        <property name="usePrefix" value="true"/>
+        <!-- cacheName 缓存超时配置，半小时，一小时，一天 -->
+        <property name="expires">
+            <map key-type="java.lang.String" value-type="java.lang.Long">
+                <entry key="halfHour" value="1800"/>
+                <entry key="hour" value="3600"/>
+                <entry key="oneDay" value="86400"/>
+                <!-- shiro cache keys -->
+                <entry key="authorizationCache" value="1800"/>
+                <entry key="authenticationCache" value="1800"/>
+                <entry key="activeSessionCache" value="1800"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- cache注解，和spring-ehcache.xml中的只能使用一个 -->
+    <cache:annotation-driven cache-manager="redisCacheManager" proxy-target-class="true" />
+
+    <!-- 配置RedisCacheConfig -->
+    <!--<bean id="redisCacheConfig" class="com.lm.springredis.rediscommon.RedisCacheConfig">-->
+        <!--<constructor-arg ref="jedisConnectionFactory" />-->
+        <!--<constructor-arg ref="redisTemplate" />-->
+        <!--<constructor-arg ref="redisCacheManager" />-->
+    <!--</bean>-->
+    <!-- redis config end -->
+</beans>

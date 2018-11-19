@@ -14,13 +14,13 @@ import java.util.EnumSet;
 
 /**
  * DispatcherServlet的编码定义方式，加载默认组件
- *
+ * <p>
  * 简言之， 当DispatcherServlet初始化后，就会自动扫描上下文的Bean, 根据名称或类型匹配的机制
  * 查找自定义的组件，找不到时则使用DispatcherServlet.properties定义的默认组件。
- *
+ * <p>
  * 继承结构
  * WebApplicationInitializer > AbstractContextLoaderInitializer > AbstractDispatcherServletInitializer > AbstractAnnotationConfigDispatcherServletInitializer
- * */
+ */
 @Order
 public class SpringMVCApplicationinitializer implements WebApplicationInitializer {
 
@@ -54,7 +54,7 @@ public class SpringMVCApplicationinitializer implements WebApplicationInitialize
         XmlWebApplicationContext appContext = new XmlWebApplicationContext();
         appContext.setConfigLocation("classpath*:/webApplicationContext.xml");
 
-        ServletRegistration.Dynamic servlet = servletContext.addServlet(SERVLET_NAME,new DispatcherServlet(appContext));
+        ServletRegistration.Dynamic servlet = servletContext.addServlet(SERVLET_NAME, new DispatcherServlet(appContext));
         servlet.setLoadOnStartup(1);
 
         // 添加springmvc 允许访问的Controller后缀 全部通过请用 “/”
@@ -68,20 +68,20 @@ public class SpringMVCApplicationinitializer implements WebApplicationInitialize
 
     private void addListener(ServletContext servletContext) {
 
-        servletContext.setInitParameter("contextConfigLocation","classpath*:/applicationContext.xml");
+        servletContext.setInitParameter("contextConfigLocation", "classpath*:/applicationContext.xml");
         servletContext.addListener(ContextLoaderListener.class);
     }
 
     private void addFilter(ServletContext servletContext) {
 
         //第一种过滤器 过滤字符集 (使用编码的定义形式)
-        FilterRegistration.Dynamic filter = servletContext.addFilter("characterEncodingFilter",new CharacterEncodingFilter());
-        filter.setInitParameter("encoding","UTF-8");
-        filter.setInitParameter("forceEncoding","true");
+        FilterRegistration.Dynamic filter = servletContext.addFilter("characterEncodingFilter", new CharacterEncodingFilter());
+        filter.setInitParameter("encoding", "UTF-8");
+        filter.setInitParameter("forceEncoding", "true");
         //  -- 第一个参数为null，则是缺省的REQUEST模式
         //  -- 第二个参数false表明在代码设置的filter先于web.xml中设置的filter，true则是先web.xml定义的filter后代码设置的。
-        filter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC),false,"/*");
-        filter.addMappingForServletNames(EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC),false,"springmvc");
+        filter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), false, "/*");
+        filter.addMappingForServletNames(EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), false, "springmvc");
 
 
         //第二种过滤器 过滤session请求（使用编码的自定义类形式）

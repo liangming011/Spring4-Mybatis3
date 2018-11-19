@@ -12,7 +12,7 @@
     <artifactId>springthread</artifactId>
     <packaging>war</packaging>
 
-    <name>springredis Maven Webapp</name>
+    <name>springthread Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -53,7 +53,7 @@
     </dependencies>
 
     <build>
-        <finalName>springredis</finalName>
+        <finalName>springthread</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>

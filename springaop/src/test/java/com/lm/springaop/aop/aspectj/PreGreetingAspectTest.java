@@ -2,7 +2,6 @@ package com.lm.springaop.aop.aspectj;
 
 import com.lm.springaop.BaseJunit4Test;
 import com.lm.springaop.aop.aspectj.example.NaiveWaiter;
-import com.lm.springaop.aop.aspectj.example.Seller;
 import com.lm.springaop.aop.aspectj.example.Waiter;
 import org.junit.After;
 import org.junit.Before;

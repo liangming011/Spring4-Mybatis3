@@ -1,6 +1,6 @@
-package com.lm.springaop.service;
+package com.lm.springredis.service;
 
-import com.lm.springaop.BaseJunit4Test;
+import com.lm.springredis.BaseJunit4Test;
 import com.lm.springthread.entity.Type;
 import com.lm.springthread.service.TypeService;
 import com.lm.springthread.service.impl.TypeServiceImpl1;

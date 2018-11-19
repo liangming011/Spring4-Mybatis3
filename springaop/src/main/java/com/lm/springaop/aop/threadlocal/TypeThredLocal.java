@@ -2,9 +2,6 @@ package com.lm.springaop.aop.threadlocal;
 
 import com.lm.springaop.entity.Type;
 
-import java.sql.Connection;
-import java.sql.Statement;
-
 public class TypeThredLocal {
 
     /**

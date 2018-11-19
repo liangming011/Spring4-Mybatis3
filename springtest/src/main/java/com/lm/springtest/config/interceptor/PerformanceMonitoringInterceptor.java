@@ -6,9 +6,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class PerformanceMonitoringInterceptor  implements HandlerInterceptor {
+public class PerformanceMonitoringInterceptor implements HandlerInterceptor {
 
-    private ThreadLocal<Long>  startTimeThreadLocal = new ThreadLocal<>();
+    private ThreadLocal<Long> startTimeThreadLocal = new ThreadLocal<>();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -27,7 +27,7 @@ public class PerformanceMonitoringInterceptor  implements HandlerInterceptor {
         long endTime = System.currentTimeMillis();//2、结束时间
         long beginTime = startTimeThreadLocal.get();//得到线程绑定的局部变量（开始时间）
         long consumeTime = endTime - beginTime;//3、消耗的时间
-        if(consumeTime > 500) {//此处认为处理时间超过500毫秒的请求为慢请求
+        if (consumeTime > 500) {//此处认为处理时间超过500毫秒的请求为慢请求
             //TODO 记录到日志文件
             System.out.println(
                     String.format("%s consume %d millis", request.getRequestURI(), consumeTime));

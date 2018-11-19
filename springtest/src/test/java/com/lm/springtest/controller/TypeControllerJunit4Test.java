@@ -37,7 +37,6 @@ public class TypeControllerJunit4Test extends BaseJunit4Test {
     protected WebApplicationContext wac;
 
 
-
     @Before
     public void setUp() throws Exception {
         this.session = new MockHttpSession();
@@ -51,7 +50,7 @@ public class TypeControllerJunit4Test extends BaseJunit4Test {
         User user = new User();
         user.setUsername("Tom");
         //给session添加参数
-        session.setAttribute("user",user);
+        session.setAttribute("user", user);
         //给request添加参数
         request.setSession(session);
         //创建实体类参数
@@ -63,13 +62,14 @@ public class TypeControllerJunit4Test extends BaseJunit4Test {
 
         String requestJson = JSONObject.toJSONString(type);
         String responseString = mockMvc.perform(MockMvcRequestBuilders.post("/type/selectType")//请求的url,请求的方法是get
-                                                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)//数据的格式
-                                                //.param("type",type)//添加参数
-                                                .content(requestJson)//添加实体参数
-                                                .session(session)
-                                                ).andExpect(MockMvcResultMatchers.status().isOk()//返回的状态是200
-                                                ).andDo(MockMvcResultHandlers.print()//打印出请求和相应的内容
-                                                ).andReturn().getResponse().getContentAsString();//将相应的数据转换为字符串
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)//数据的格式
+//                .param("start", "0")
+//                .param("length", "10")
+                .flashAttr("searchModel", type)
+                .session(session)
+        ).andExpect(MockMvcResultMatchers.status().isOk()//返回的状态是200
+        ).andDo(MockMvcResultHandlers.print()//打印出请求和相应的内容
+        ).andReturn().getResponse().getContentAsString();//将相应的数据转换为字符串
 
         System.out.println("返回值：" + responseString);
 

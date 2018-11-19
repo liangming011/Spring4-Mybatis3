@@ -51,10 +51,10 @@
     <filter-mapping>
         <filter-name>log4jServletFilter</filter-name>
         <url-pattern>/*</url-pattern>
-            <dispatcher>REQUEST</dispatcher>
-            <dispatcher>FORWARD</dispatcher>
-            <dispatcher>INCLUDE</dispatcher>
-            <dispatcher>ERROR</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
     </filter-mapping>
 
     <!-- 第一个过滤器 过滤字符集 -->

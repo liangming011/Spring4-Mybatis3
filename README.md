@@ -1,4 +1,12 @@
 #Spring4-Mybatis3-Learning
 
-##SpringMVC初级学习
+##学习顺序
+
+###SpringMVC
+
+###SpringTEST
+
+###SpringAOP
+
+###SpringRedis
 

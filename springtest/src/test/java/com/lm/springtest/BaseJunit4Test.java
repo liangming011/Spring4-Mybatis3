@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 //Junit启动时加载SpringIOC容器
 @RunWith(SpringJUnit4ClassRunner.class)
 //加载spring配置文件
-@ContextConfiguration(value = {"classpath:spring-context.xml","classpath:spring-mvc.xml"})
+@ContextConfiguration(value = {"classpath:spring-context.xml", "classpath:spring-mvc.xml"})
 //配置事务的回滚,对数据库的增删改都会回滚,便于测试用例的循环利用
 @Transactional
 //@webappconfiguration是一级注释，用于声明一个ApplicationContext集成测试加载WebApplicationContext。作用是模拟ServletContext
@@ -19,7 +19,7 @@ public class BaseJunit4Test {
 
     /**
      * 以下方法仅说明测试用例所有的测试方法，在BaseJunit4Test中一般不写
-     * */
+     */
 
 
     @BeforeClass

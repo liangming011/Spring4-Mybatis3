@@ -15,8 +15,8 @@ public class UserController {
     @Autowired                      /*注入业务层bean*/
     private UserService userService;
 
-    @RequestMapping(value = "/register",method = RequestMethod.GET)    /*返回一个ModelAndView类型的逻辑视图名,请求方式*/
-    public ModelAndView register(User user){
+    @RequestMapping(value = "/register", method = RequestMethod.GET)    /*返回一个ModelAndView类型的逻辑视图名,请求方式*/
+    public ModelAndView register(User user) {
         userService.createUser(user);
         ModelAndView mav = new ModelAndView();
         mav.addObject("user", null);
@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login")    /*返回一个String类型的逻辑视图名*/
-    public String login(){
+    public String login() {
         return "/login";
     }
 

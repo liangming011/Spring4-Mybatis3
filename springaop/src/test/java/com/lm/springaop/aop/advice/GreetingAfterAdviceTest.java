@@ -3,7 +3,6 @@ package com.lm.springaop.aop.advice;
 import com.lm.springaop.BaseJunit4Test;
 import com.lm.springaop.entity.Type;
 import com.lm.springaop.service.TypeService;
-import com.lm.springaop.service.impl.TypeServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.aop.BeforeAdvice;
@@ -12,8 +11,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.annotation.Resource;
-
-import static org.junit.Assert.*;
 
 public class GreetingAfterAdviceTest extends BaseJunit4Test {
 

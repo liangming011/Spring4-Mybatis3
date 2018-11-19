@@ -3,7 +3,6 @@ package com.lm.springaop.service.impl;
 import com.lm.springaop.dao.TypeDao;
 import com.lm.springaop.entity.Type;
 import com.lm.springaop.service.TypeService;
-import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

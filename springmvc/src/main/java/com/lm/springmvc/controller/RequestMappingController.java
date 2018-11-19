@@ -77,9 +77,9 @@ public class RequestMappingController {
     @RequestMapping(path = "/handlel")
     public String handlel(
             //required = false表示此参数可以不传
-            @RequestParam(value = "userName",required = false) String userName,
+            @RequestParam(value = "userName", required = false) String userName,
             //required = true表示此参数不可为空,值为空则默认为aaa
-            @RequestParam(value = "pwd",required = true,defaultValue = "aaa") String pwd,
+            @RequestParam(value = "pwd", required = true, defaultValue = "aaa") String pwd,
             //value = "realName"指的是前端的参数名，string1值得是后端的参数名
             @RequestParam(value = "realName") String string1) {
         return "success";
@@ -103,12 +103,13 @@ public class RequestMappingController {
     // @ResponseBody，实体默认转换成json返回，具体看情况如String、byte[]等，具体看实体类中配置方式。
     //HttpMessageConverter<T>接口负责这种转换
     @RequestMapping(path = "/handle3")
-    public @ResponseBody User handle3(@RequestBody User user) {
+    public @ResponseBody
+    User handle3(@RequestBody User user) {
         return user;
     }
 
     //4: 直接桴HTTP请戎对象抟递给处理方法
-    @RequestMapping(path="/handle4")
+    @RequestMapping(path = "/handle4")
     public String handle4(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         request.getSession();
         request.getCookies();
@@ -124,9 +125,9 @@ public class RequestMappingController {
     public String handle5(WebRequest request, NativeWebRequest nativeWebRequest) {
         User user = new User();
         request.getParameter("");
-        request.setAttribute("user",user,1);
+        request.setAttribute("user", user, 1);
         nativeWebRequest.getParameter("");
-        nativeWebRequest.setAttribute("user",user,1);
+        nativeWebRequest.setAttribute("user", user, 1);
         return "success";
     }
 
@@ -134,7 +135,7 @@ public class RequestMappingController {
     @RequestMapping(path = "/handle6")
     public String handle6(OutputStream os) throws IOException {
         Resource res = new ClassPathResource("/image.jpg");//读取文件
-        FileCopyUtils.copy(res.getInputStream(),os);//将图片写到输出流中
+        FileCopyUtils.copy(res.getInputStream(), os);//将图片写到输出流中
 
         return "success";
     }

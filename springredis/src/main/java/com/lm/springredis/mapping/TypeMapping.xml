@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lm.springredis.dao.TypeDao">
+
+    <select id="selectType" parameterType="com.lm.springredis.entity.Type" resultType="com.lm.springredis.entity.Type">
+        select * from typetable where idstring=#{idString,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteType" parameterType="com.lm.springredis.entity.Type">
+        delete from typetable where idstring=#{idString,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insertType" parameterType="com.lm.springredis.entity.Type">
+        insert into typetable (idstring, anint, adate, afloat, adouble, aboolean, achar)
+        VALUES (
+        #{idString,jdbcType=VARCHAR},
+        #{anInt,jdbcType=INTEGER},
+        #{aDate,jdbcType=TIMESTAMP},
+        #{aFloat,jdbcType=FLOAT},
+        #{aDouble,jdbcType=DOUBLE},
+        #{aBoolean,jdbcType=INTEGER},
+        #{aChar,jdbcType=CHAR})
+    </insert>
+
+    <update id="updateType" parameterType="com.lm.springredis.entity.Type">
+        update updateType set
+        anint =#{anInt,jdbcType=INTEGER},
+        adate =#{aDate,jdbcType=TIMESTAMP},
+        afloat =#{aFloat,jdbcType=FLOAT},
+        adouble =#{aDouble,jdbcType=DOUBLE},
+        success =#{aBoolean,jdbcType=INTEGER},
+        achar = #{aChar,jdbcType=CHAR})
+        where idstring = #{idString,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

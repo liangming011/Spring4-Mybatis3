@@ -1,4 +1,4 @@
-package com.lm.springaop;
+package com.lm.springredis;
 
 import org.junit.*;
 import org.junit.runner.RunWith;
